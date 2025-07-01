@@ -1,122 +1,202 @@
-/* Base Reset */
-* {
+/* Background checkerboard */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-image:
+    linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(-45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  background-repeat: repeat;
+}
+
+/* Container box */
+#wrapper {
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: white;
+  border: 4px solid #00aaff;
+  /* bright blue border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+/* Header */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ccc;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Navigation */
+nav {
+  background-color: #222;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+nav ul {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  list-style: none;
+  display: flex;
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: #f4f4f4;
-  color: #222;
-  line-height: 1.6;
-  padding: 1rem;
+nav ul li {
+  margin: 0;
 }
 
-/* Links & Buttons */
-a {
-  color: #004080;
+nav ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
   text-decoration: none;
+  font-weight: 600;
 }
 
-a.btn-primary {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.75rem 1.25rem;
-  background-color: #004080;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+nav ul li a:hover {
+  background-color: #00aaff;
 }
 
-a.btn-primary:hover {
-  background-color: #002a5c;
-}
-
-/* HERO Section */
+/* Hero Section */
 .hero {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
 }
 
-.hero img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+.hero-text {
+  max-width: 45%;
 }
 
 .hero-text h1 {
-  font-size: 1.8rem;
+  color: #00aaff;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
-.hero-text p {
-  font-size: 1rem;
-  color: #333;
-}
-
-/* Features Section */
-.features {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.features article {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.features img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 6px;
+.hero-text ul {
+  list-style: none;
+  padding-left: 0;
+  color: #00aaff;
   margin-bottom: 1rem;
 }
 
-.features h2 {
-  color: #004080;
-  margin-bottom: 0.5rem;
+.hero-text ul li {
+  margin-bottom: 0.3rem;
 }
 
-.features p {
-  font-size: 0.95rem;
-  color: #444;
+.btn-primary {
+  background-color: #00aaff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
-/* Footer (optional support) */
-footer {
-  margin-top: 3rem;
-  padding: 1rem;
+.btn-primary:hover {
+  background-color: #0077cc;
+}
+
+.hero-image img {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Content columns below hero */
+.content-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.upgrades,
+.reviews {
+  width: 48%;
+}
+
+.upgrades ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.upgrades li {
   text-align: center;
-  font-size: 0.875rem;
-  background-color: #004080;
-  color: #fff;
 }
 
-/* Media Queries - Desktop Layout */
-@media screen and (min-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.4rem;
+.upgrades img {
+  max-width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.upgrades a {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.upgrades a:hover {
+  text-decoration: underline;
+}
+
+.reviews ul {
+  padding-left: 20px;
+}
+
+.reviews li {
+  margin-bottom: 0.8rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Responsive for mobile */
+@media (max-width: 700px) {
+  #wrapper {
+    margin: 10px;
+    border-width: 2px;
+    padding: 15px;
   }
 
-  .hero-text p {
-    font-size: 1.1rem;
+  .hero {
+    flex-direction: column;
   }
 
-  .features {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1.5rem;
+  .hero-text,
+  .hero-image {
+    max-width: 100%;
+    text-align: center;
   }
 
-  .features article {
-    flex: 1;
+  .content-columns {
+    flex-direction: column;
+  }
+
+  .upgrades,
+  .reviews {
+    width: 100%;
+  }
+
+  .upgrades ul {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
