@@ -1,4 +1,11 @@
-<% const d=new Date() let year=d.getFullYear() %>
-    <footer>
-        <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
-    </footer>
+<footer>
+    <p>&copy; <span id="year"></span> CSE Motors. All rights reserved.</p>
+    <p>Last Modified: <span id="lastModified"></span></p>
+
+    <script>
+        // Safe vanilla JS in script tag
+        document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById("lastModified").textContent = document.lastModified;
+    </script>
+</footer>
+  
