@@ -1,6 +1,122 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+/* Links & Buttons */
+a {
+  color: #004080;
+  text-decoration: none;
+}
+
+a.btn-primary {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #004080;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+a.btn-primary:hover {
+  background-color: #002a5c;
+}
+
+/* HERO Section */
+.hero {
+  text-align: center;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.hero-text h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.features article {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.features img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.features h2 {
+  color: #004080;
+  margin-bottom: 0.5rem;
+}
+
+.features p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Footer (optional support) */
+footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  background-color: #004080;
+  color: #fff;
+}
+
+/* Media Queries - Desktop Layout */
+@media screen and (min-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
+  }
+
+  .features {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .features article {
+    flex: 1;
+  }
 }

@@ -1,2 +1,39 @@
-<h1>Welcome to CSE Motors</h1>
-<p>This is a test page using EJS layout and partials.</p>
+<%- include('partials/head') %>
+
+    <body>
+        <%- include('partials/header') %>
+            <%- include('partials/nav') %>
+
+                <main>
+                    <section class="hero">
+                        <img src="/images/delorean.jpg" alt="Delorean parked in front of CSE Motors" />
+                        <div class="hero-text">
+                            <h1>Welcome to CSE Motors</h1>
+                            <p>Your trusted partner in new and used vehicles.</p>
+                            <a href="#" class="btn-primary">View Inventory</a>
+                        </div>
+                    </section>
+
+                    <section class="features">
+                        <article>
+                            <img src="/images/escalade.jpg" alt="Black Escalade parked in showroom" />
+                            <h2>Reliable Performance</h2>
+                            <p>Each vehicle is tested to meet high standards in safety and performance.</p>
+                        </article>
+                        <article>
+                            <img src="/images/survan.jpg" alt="Red Survan SUV on the road" />
+                            <h2>Comfort & Style</h2>
+                            <p>Our lineup features vehicles with luxury design and top-rated comfort.</p>
+                        </article>
+                        <article>
+                            <img src="/images/mechanic.jpg" alt="White truck ready for rough terrain" />
+                            <h2>Ready for Adventure</h2>
+                            <p>From city driving to country roads, we’ve got the right ride for you.</p>
+                        </article>
+                    </section>
+                </main>
+
+                <%- include('partials/footer') %>
+    </body>
+
+    </html>
