@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<%= include('../partials/head') %>
+<%- include('../partials/head') %>
 
     <body>
         <div id="wrapper">
-            <%= include('../partials/header') %>
-                <%= include('../partials/nav') %>
+            <%- include('../partials/header') %>
+                <%- include('../partials/nav') %>
+
                     <main>
-                        <%= body %>
+                        <%- body %> <!-- This is where your index.ejs content renders -->
                     </main>
-                    <%= include('../partials/footer') %>
+
+                    <%- include('../partials/footer') %>
         </div>
     </body>
 
