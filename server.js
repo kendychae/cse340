@@ -23,6 +23,10 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Static Routing
  *************************/
+
+// ✅ This line ensures your public/ folder (images, css, js) is served properly
+app.use(express.static("public"))
+
 app.use(static)
 
 /* ***********************
