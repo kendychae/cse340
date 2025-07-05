@@ -7,13 +7,13 @@
                 }
             },
             "previewLimit": 50,
-            "server": "dpg-d1km4095pdvs73b1l530-a.oregon-postgres.render.com",
+            "server": "dpg-d1kpgv95pdvs73b5knt0-a.oregon-postgres.render.com",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "cse340_db",
-            "database": "cse340_db_4eq6",
-            "username": "cse340_db_4eq6_user",
-            "password": "k9aNnhpMNEPKeNd8JpCQGgN00FDEusu4"
+            "name": "cse340_db4",
+            "database": "cse340_db4_6gg6",
+            "username": "cse340_db4_6gg6_user",
+            "password": "dnmnNVlUX67KOGE3445iD9tBGxZOzS4M"
         }
     ]
 }

@@ -1,6 +1,11 @@
 -- Task 1: SQL Queries for Assignment 2
 -- 1. Insert new record to the account table
-INSERT INTO account (first_name, last_name, email, password)
+INSERT INTO account (
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_password
+    )
 VALUES (
         'Tony',
         'Stark',
@@ -10,10 +15,10 @@ VALUES (
 -- 2. Update Tony Stark record to change account_type to 'Admin'
 UPDATE account
 SET account_type = 'Admin'
-WHERE email = 'tony@starkent.com';
+WHERE account_email = 'tony@starkent.com';
 -- 3. Delete Tony Stark record from the database
 DELETE FROM account
-WHERE email = 'tony@starkent.com';
+WHERE account_email = 'tony@starkent.com';
 -- 4. Modify the "GM Hummer" record description using PostgreSQL REPLACE
 UPDATE inventory
 SET inv_description = REPLACE(
