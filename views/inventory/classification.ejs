@@ -1,0 +1,14 @@
+<%# Classification View for CSE Motors %>
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <h1>Vehicle Classification</h1>
+<% } %>
+
+<% if (locals.messages) { %>
+    <div class="notice">
+        <%= messages %>
+    </div>
+<% } %>
+
+<%- grid %>
