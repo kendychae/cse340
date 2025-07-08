@@ -23,11 +23,13 @@ This is a web application for CSE Motors, built with Node.js, Express, and Postg
 
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Set up environment variables:
+
    - Copy `.env.example` to `.env`
    - Update database connection string in `.env`
 
@@ -39,11 +41,13 @@ This is a web application for CSE Motors, built with Node.js, Express, and Postg
 ### Running the Application
 
 Development mode:
+
 ```bash
 pnpm run dev
 ```
 
 Production mode:
+
 ```bash
 pnpm start
 ```
@@ -71,6 +75,7 @@ The application will be available at `http://localhost:3000`
 ## Database Schema
 
 The application uses three main tables:
+
 - `classification` - Vehicle categories
 - `inventory` - Vehicle inventory data
 - `account` - User accounts
@@ -86,6 +91,7 @@ This project fulfills the requirements for CSE 340 Assignment 3:
 ## Testing
 
 Test the application by:
+
 1. Navigating through different vehicle classifications
 2. Viewing individual vehicle details
 3. Testing error handling with the footer link
