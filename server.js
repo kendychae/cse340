@@ -49,14 +49,21 @@ app.use("/error", utilities.handleErrors(errorRoute))
  * Default Route
  *************************/
 app.get("/", utilities.handleErrors(async (req, res, next) => {
-  const nav = await utilities.getNav()
-  res.render("index", { title: "Home", nav })
+  try {
+    const nav = await utilities.getNav()
+    res.render("index", { title: "Home", nav })
+  } catch (error) {
+    console.error("Error in home route:", error.message)
+    // Fallback if database is not available
+    const nav = "<ul><li><a href='/'>Home</a></li></ul>"
+    res.render("index", { title: "Home", nav })
+  }
 }))
 
 /* ***********************
  * Local Server Information
  *************************/
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const host = process.env.HOST || "localhost"
 
 /* ***********************
@@ -68,8 +75,15 @@ app.use(async (req, res, next) => {
 })
 
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
+  let nav = "<ul><li><a href='/'>Home</a></li></ul>" // Fallback nav
+  try {
+    nav = await utilities.getNav()
+  } catch (navError) {
+    console.error("Error getting navigation:", navError.message)
+  }
+  
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  let message
   if(err.status == 404){ 
     message = err.message
   } else {
