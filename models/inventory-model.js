@@ -4,7 +4,13 @@ const db = require("../database/")
  *  Get all classification data
  * ************************** */
 async function getClassifications(){
-  return await db.query("SELECT * FROM public.classification ORDER BY classification_name")
+  try {
+    return await db.query("SELECT * FROM public.classification ORDER BY classification_name")
+  } catch (error) {
+    console.error("Error getting classifications:", error)
+    // Return empty result structure to prevent crashes
+    return { rows: [] }
+  }
 }
 
 /* ***************************

@@ -93,6 +93,13 @@ app.get("/", utilities.handleErrors(async (req, res, next) => {
 }))
 
 /* ***********************
+ * Favicon Route - Handle favicon requests
+ *************************/
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end() // No Content response
+})
+
+/* ***********************
  * Local Server Information
  *************************/
 const port = process.env.PORT || 3001
