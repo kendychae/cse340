@@ -110,7 +110,8 @@ utilities.checkClassificationData = async (req, res, next) => {
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    let nav = await require("./index").getNav()
+    const utilIndex = require("./index")
+    let nav = await utilIndex.getNav()
     res.render("inventory/add-classification", {
       errors,
       title: "Add New Classification",
@@ -141,8 +142,9 @@ utilities.checkInventoryData = async (req, res, next) => {
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    let nav = await require("./index").getNav()
-    let classificationList = await require("./index").buildClassificationList(classification_id)
+    const utilIndex = require("./index")
+    let nav = await utilIndex.getNav()
+    let classificationList = await utilIndex.buildClassificationList(classification_id)
     res.render("inventory/add-inventory", {
       errors,
       title: "Add New Vehicle",
