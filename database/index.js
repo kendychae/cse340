@@ -32,9 +32,23 @@ if (process.env.NODE_ENV == "development") {
     },
   }
 } else {
+  // Production configuration
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
+    ssl: {
+      rejectUnauthorized: false,
+    },
   })
-  module.exports = pool
+  
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params)
+        return res
+      } catch (error) {
+        console.error("Database query error:", error)
+        throw error
+      }
+    },
+  }
 }
