@@ -1,0 +1,89 @@
+<% if (title) { %>
+  <% title %>
+<% } else {res.locals.title = "Add New Vehicle" } %>
+
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<form id="addInventoryForm" action="/inv/add-inventory" method="post">
+  <fieldset>
+    <legend>Add Vehicle</legend>
+    
+    <label for="classificationList">Classification:</label>
+    <%- classificationList %>
+    
+    <label for="invMake">Make:</label>
+    <input type="text" id="invMake" name="inv_make" required minlength="3" value="<%= locals.inv_make || '' %>">
+    
+    <label for="invModel">Model:</label>
+    <input type="text" id="invModel" name="inv_model" required minlength="3" value="<%= locals.inv_model || '' %>">
+    
+    <label for="invYear">Year:</label>
+    <input type="number" id="invYear" name="inv_year" required min="1900" max="2030" value="<%= locals.inv_year || '' %>">
+    
+    <label for="invDescription">Description:</label>
+    <textarea id="invDescription" name="inv_description" required rows="3"><%= locals.inv_description || '' %></textarea>
+    
+    <label for="invImage">Image Path:</label>
+    <input type="text" id="invImage" name="inv_image" required value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>">
+    
+    <label for="invThumbnail">Thumbnail Path:</label>
+    <input type="text" id="invThumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>">
+    
+    <label for="invPrice">Price:</label>
+    <input type="number" id="invPrice" name="inv_price" required min="0" step="0.01" value="<%= locals.inv_price || '' %>">
+    
+    <label for="invMiles">Miles:</label>
+    <input type="number" id="invMiles" name="inv_miles" required min="0" value="<%= locals.inv_miles || '' %>">
+    
+    <label for="invColor">Color:</label>
+    <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color || '' %>">
+    
+    <input type="submit" value="Add Vehicle">
+  </fieldset>
+</form>
+
+<script>
+document.getElementById('addInventoryForm').addEventListener('submit', function(e) {
+    const make = document.getElementById('invMake').value;
+    const model = document.getElementById('invModel').value;
+    const year = document.getElementById('invYear').value;
+    const description = document.getElementById('invDescription').value;
+    const image = document.getElementById('invImage').value;
+    const thumbnail = document.getElementById('invThumbnail').value;
+    const price = document.getElementById('invPrice').value;
+    const miles = document.getElementById('invMiles').value;
+    const color = document.getElementById('invColor').value;
+    const classification = document.getElementById('classificationList').value;
+    
+    let errors = [];
+    
+    if (make.length < 3) errors.push('Make must be at least 3 characters');
+    if (model.length < 3) errors.push('Model must be at least 3 characters');
+    if (year.length !== 4 || isNaN(year)) errors.push('Year must be 4 digits');
+    if (description.trim() === '') errors.push('Description is required');
+    if (image.trim() === '') errors.push('Image path is required');
+    if (thumbnail.trim() === '') errors.push('Thumbnail path is required');
+    if (isNaN(price) || price <= 0) errors.push('Price must be a positive number');
+    if (isNaN(miles) || miles < 0) errors.push('Miles must be a non-negative number');
+    if (color.trim() === '') errors.push('Color is required');
+    if (classification === '') errors.push('Please choose a classification');
+    
+    if (errors.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n' + errors.join('\n'));
+        return false;
+    }
+});
+</script>

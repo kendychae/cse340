@@ -8,6 +8,8 @@
  *************************/
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
+const session = require("express-session")
+const flash = require("connect-flash")
 require("dotenv").config()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
@@ -16,6 +18,37 @@ const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/")
 
 const app = express()
+
+/* ***********************
+ * Session Configuration
+ *************************/
+app.use(session({
+  name: 'sessionId',
+  secret: process.env.SESSION_SECRET || 'your-secret-key-here',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true in production with HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  }
+}))
+
+// Flash messages middleware
+app.use(flash())
+
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+/* ***********************
+ * Express Messages Middleware
+ *************************/
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  res.locals.notice = req.flash('notice')
+  next()
+})
 
 /* ***********************
  * View Engine and Templates

@@ -339,6 +339,107 @@ footer a:hover {
   box-shadow: 0 0 5px rgba(0, 170, 255, 0.3);
 }
 
+/* Form Styling */
+fieldset {
+  border: 2px solid #00aaff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+legend {
+  background-color: #00aaff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+form input[type="submit"] {
+  background-color: #00aaff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+form input[type="submit"]:hover {
+  background-color: #0088cc;
+}
+
+/* Management Links */
+.management-links {
+  margin: 20px 0;
+}
+
+.management-links p {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: #f0f8ff;
+  border: 1px solid #00aaff;
+  border-radius: 5px;
+}
+
+.management-links a {
+  color: #00aaff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.management-links a:hover {
+  text-decoration: underline;
+}
+
+/* Notice Messages */
+.notice {
+  background-color: #e7f3ff;
+  border: 1px solid #00aaff;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 15px 0;
+  color: #004080;
+}
+
+/* Error Messages */
+.notice ul {
+  background-color: #ffe7e7;
+  border: 1px solid #ff4444;
+  list-style-type: none;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.notice li {
+  color: #cc0000;
+  margin: 5px 0;
+}
+
 /* Account Options */
 .account-options {
   margin-top: 20px;

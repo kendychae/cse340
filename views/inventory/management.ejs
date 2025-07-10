@@ -1,0 +1,22 @@
+<% if (title) { %>
+  <% title %>
+<% } else {res.locals.title = "Vehicle Management" } %>
+
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<div class="management-links">
+  <p><a href="/inv/add-classification" title="Add a new classification">Add New Classification</a></p>
+  <p><a href="/inv/add-inventory" title="Add a new vehicle">Add New Vehicle</a></p>
+</div>

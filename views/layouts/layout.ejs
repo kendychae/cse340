@@ -5,11 +5,12 @@
     <body>
         <div id="wrapper">
             <%- include('../partials/header') %>
-                <%- include('../partials/nav') %>
-
-                    <main>
-                        <%- body %> <!-- This is where your index.ejs content renders -->
-                    </main>
+                <%- include('../partials/nav') %>                <main>
+                    <% if (locals.notice) { %>
+                        <p class="notice"><%= notice %></p>
+                    <% } %>
+                    <%- body %> <!-- This is where your index.ejs content renders -->
+                </main>
 
                     <%- include('../partials/footer') %>
         </div>
