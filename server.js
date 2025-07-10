@@ -45,7 +45,6 @@ app.use(express.json())
  * Express Messages Middleware
  *************************/
 app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
   res.locals.notice = req.flash('notice')
   next()
 })
