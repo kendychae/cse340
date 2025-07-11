@@ -1,22 +1,50 @@
 <%# Register View %>
-<h1>Register</h1>
-<form>
-  <div class="form-group">
-    <label for="firstname">First Name:</label>
-    <input type="text" id="firstname" name="firstname" required>
-  </div>
-  <div class="form-group">
-    <label for="lastname">Last Name:</label>
-    <input type="text" id="lastname" name="lastname" required>
-  </div>
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-  </div>
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <button type="submit" class="btn-primary">Register</button>
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<form id="registerForm" action="/account/register" method="post">
+  <fieldset>
+    <legend>Create a New Account</legend>
+    
+    <label for="account_firstname">First Name:</label>
+    <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname || '' %>">
+    
+    <label for="account_lastname">Last Name:</label>
+    <input type="text" id="account_lastname" name="account_lastname" required value="<%= locals.account_lastname || '' %>">
+    
+    <label for="account_email">Email address:</label>
+    <input type="email" id="account_email" name="account_email" required value="<%= locals.account_email || '' %>">
+    
+    <label for="account_password">Password:</label>
+    <input type="password" id="account_password" name="account_password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$">
+    <span>Password must be at least 12 characters and contain at least 1 uppercase, 1 lowercase, 1 number and 1 special character.</span>
+    
+    <input type="submit" value="Register">
+  </fieldset>
 </form>
+
 <p><a href="/account/login">Already have an account? Login here</a></p>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('account_password').value;
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+    
+    if (!pattern.test(password)) {
+        e.preventDefault();
+        alert('Password must be at least 12 characters and contain at least 1 uppercase, 1 lowercase, 1 number and 1 special character.');
+        return false;
+    }
+});
+</script>

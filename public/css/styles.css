@@ -33,6 +33,20 @@ body {
   font-size: 1.2rem;
 }
 
+#tools {
+  display: flex;
+  gap: 15px;
+}
+
+#tools a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+#tools a:hover {
+  text-decoration: underline;
+}
+
 /* Navigation */
 nav {
   background-color: #222;

@@ -1,14 +1,30 @@
 <%# Login View %>
-<h1>Login</h1>
-<form>
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-  </div>
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <button type="submit" class="btn-primary">Login</button>
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<form action="/account/login" method="post">
+  <fieldset>
+    <legend>Login to Your Account</legend>
+    
+    <label for="account_email">Email address:</label>
+    <input type="email" id="account_email" name="account_email" required value="<%= locals.account_email || '' %>">
+    
+    <label for="account_password">Password:</label>
+    <input type="password" id="account_password" name="account_password" required>
+    
+    <input type="submit" value="Sign In">
+  </fieldset>
 </form>
+
 <p><a href="/account/register">Don't have an account? Register here</a></p>

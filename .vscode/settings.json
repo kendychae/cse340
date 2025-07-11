@@ -1,4 +1,5 @@
 {
+    "npm.packageManager": "pnpm",
     "sqltools.connections": [
         {
             "pgOptions": {

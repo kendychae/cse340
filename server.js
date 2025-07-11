@@ -10,6 +10,7 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const session = require("express-session")
 const flash = require("connect-flash")
+const cookieParser = require("cookie-parser")
 require("dotenv").config()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
@@ -37,6 +38,9 @@ app.use(session({
 // Flash messages middleware
 app.use(flash())
 
+// Cookie parser middleware
+app.use(cookieParser())
+
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -48,6 +52,11 @@ app.use(function(req, res, next){
   res.locals.notice = req.flash('notice')
   next()
 })
+
+/* ***********************
+ * JWT Token Middleware
+ *************************/
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates

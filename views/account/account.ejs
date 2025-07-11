@@ -1,7 +1,18 @@
 <%# Account Management View %>
-<h1>Account Management</h1>
-<p>Welcome to your account management area.</p>
-<div class="account-options">
-  <a href="/account/login" class="btn-primary">Login</a>
-  <a href="/account/register" class="btn-primary">Register</a>
-</div>
+<% if (locals.loggedin && locals.accountData) { %>
+  <h2>Welcome <%= locals.accountData.account_firstname %></h2>
+  
+  <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
+  
+  <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/">Manage Inventory</a></p>
+  <% } %>
+<% } else { %>
+  <h1>Account Management</h1>
+  <p>Welcome to your account management area.</p>
+  <div class="account-options">
+    <a href="/account/login" class="btn-primary">Login</a>
+    <a href="/account/register" class="btn-primary">Register</a>
+  </div>
+<% } %>
