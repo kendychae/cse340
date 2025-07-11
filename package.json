@@ -11,7 +11,8 @@
     "dev": "nodemon server.js",
     "test-db": "node database/test-connection.js",
     "test-setup": "node database/test-setup.js",
-    "update-db": "node database/update-database.js"
+    "update-db": "node database/update-database.js",
+    "verify-assignment5": "node database/verify-assignment5.js"
   },
   "author": "",
   "license": "ISC",
