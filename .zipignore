@@ -1,0 +1,11 @@
+# Files to exclude from submission ZIP
+node_modules/
+*.zip
+.git/
+public/images/
+*.log
+.env
+package-lock.json
+pnpm-lock.yaml
+*.tmp
+*.temp
