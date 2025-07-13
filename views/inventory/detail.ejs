@@ -11,4 +11,155 @@
     </div>
 <% } %>
 
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
 <%- detailView %>
+
+<!-- Customer Reviews Section -->
+<div class="reviews-section">
+  <div class="reviews-header">
+    <h2>Customer Reviews</h2>
+    <% if (ratingData && ratingData.count > 0) { %>
+      <div class="rating-summary">
+        <span class="average-rating"><%= ratingData.average %>/5.0</span>
+        <span class="review-count">(<%= ratingData.count %> review<%= ratingData.count !== 1 ? 's' : '' %>)</span>
+      </div>
+    <% } else { %>
+      <p class="no-ratings">No reviews yet</p>
+    <% } %>
+    
+    <% if (locals.loggedin) { %>
+      <% if (!hasReviewed) { %>
+        <p><a href="/reviews/add/<%= inv_id %>" class="add-review-btn">Write a Review</a></p>
+      <% } else { %>
+        <p class="already-reviewed">You have already reviewed this vehicle</p>
+      <% } %>
+    <% } else { %>
+      <p><a href="/account/login">Login to write a review</a></p>
+    <% } %>
+  </div>
+  
+  <% if (reviews && reviews.length > 0) { %>
+    <div class="reviews-list">
+      <% reviews.forEach(review => { %>
+        <div class="review">
+          <div class="review-header">
+            <h4><%= review.review_title %></h4>
+            <div class="review-meta">
+              <span class="rating">
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <span class="star <%= i <= review.review_rating ? 'filled' : '' %>">★</span>
+                <% } %>
+              </span>
+              <span class="reviewer">by <%= review.account_firstname %> <%= review.account_lastname %></span>
+              <span class="date"><%= new Date(review.review_date).toLocaleDateString() %></span>
+            </div>
+          </div>
+          <div class="review-content">
+            <p><%= review.review_text %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="no-reviews">No reviews available for this vehicle yet. Be the first to review!</p>
+  <% } %>
+</div>
+
+<style>
+.reviews-section {
+  margin-top: 40px;
+  border-top: 2px solid #ddd;
+  padding-top: 20px;
+}
+
+.reviews-header {
+  margin-bottom: 20px;
+}
+
+.reviews-header h2 {
+  margin-bottom: 10px;
+}
+
+.rating-summary {
+  margin: 10px 0;
+}
+
+.average-rating {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ff6b00;
+}
+
+.review-count {
+  margin-left: 10px;
+  color: #666;
+}
+
+.add-review-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.add-review-btn:hover {
+  background-color: #0056b3;
+}
+
+.already-reviewed {
+  color: #666;
+  font-style: italic;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+}
+
+.review-header h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.review-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.rating .star {
+  color: #ddd;
+  font-size: 1.2em;
+}
+
+.rating .star.filled {
+  color: #ff6b00;
+}
+
+.review-content {
+  line-height: 1.5;
+}
+
+.no-reviews, .no-ratings {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+</style>

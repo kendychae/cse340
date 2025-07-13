@@ -378,4 +378,68 @@ utilities.checkInventoryData = async (req, res, next) => {
   next()
 }
 
+/* **********************
+ *  Review Data Validation Rules
+ *********************** */
+utilities.reviewRules = () => {
+  return [
+    // Rating is required and must be 1-5
+    body("review_rating")
+      .trim()
+      .notEmpty()
+      .isInt({ min: 1, max: 5 })
+      .withMessage("Please provide a rating between 1 and 5 stars."),
+
+    // Title is required
+    body("review_title")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 3, max: 100 })
+      .withMessage("Please provide a review title (3-100 characters)."),
+
+    // Review text is required
+    body("review_text")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 10, max: 1000 })
+      .withMessage("Please provide a review (10-1000 characters)."),
+
+    // Inventory ID is required
+    body("inv_id")
+      .trim()
+      .notEmpty()
+      .isNumeric()
+      .withMessage("Invalid vehicle selection."),
+  ]
+}
+
+/* ******************************
+ * Check review data and return errors or continue
+ * ***************************** */
+utilities.checkReviewData = async (req, res, next) => {
+  const { review_rating, review_title, review_text, inv_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const utilIndex = require("./index")
+    const invModel = require("../models/inventory-model")
+    let nav = await utilIndex.getNav()
+    const vehicleData = await invModel.getInventoryByInventoryId(inv_id)
+    res.render("reviews/add-review", {
+      errors,
+      title: `Review ${vehicleData.inv_year} ${vehicleData.inv_make} ${vehicleData.inv_model}`,
+      nav,
+      vehicleData,
+      inv_id,
+      review_rating,
+      review_title,
+      review_text
+    })
+    return
+  }
+  next()
+}
+
 module.exports = utilities

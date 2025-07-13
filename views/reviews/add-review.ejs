@@ -1,0 +1,83 @@
+<%# Add Review View %>
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<div class="vehicle-info">
+  <h2>Vehicle Details</h2>
+  <p><strong><%= vehicleData.inv_year %> <%= vehicleData.inv_make %> <%= vehicleData.inv_model %></strong></p>
+  <p>Price: $<%= vehicleData.inv_price.toLocaleString() %></p>
+  <p>Mileage: <%= vehicleData.inv_miles.toLocaleString() %> miles</p>
+  <p>Color: <%= vehicleData.inv_color %></p>
+</div>
+
+<form id="addReviewForm" action="/reviews/add" method="post">
+  <fieldset>
+    <legend>Write Your Review</legend>
+    
+    <label for="review_rating">Rating (1-5 stars):</label>
+    <select id="review_rating" name="review_rating" required>
+      <option value="">Select Rating</option>
+      <option value="1" <%= locals.review_rating == '1' ? 'selected' : '' %>>1 Star - Poor</option>
+      <option value="2" <%= locals.review_rating == '2' ? 'selected' : '' %>>2 Stars - Fair</option>
+      <option value="3" <%= locals.review_rating == '3' ? 'selected' : '' %>>3 Stars - Good</option>
+      <option value="4" <%= locals.review_rating == '4' ? 'selected' : '' %>>4 Stars - Very Good</option>
+      <option value="5" <%= locals.review_rating == '5' ? 'selected' : '' %>>5 Stars - Excellent</option>
+    </select>
+    
+    <label for="review_title">Review Title:</label>
+    <input type="text" 
+           id="review_title" 
+           name="review_title" 
+           required 
+           minlength="3" 
+           maxlength="100"
+           placeholder="Brief summary of your experience"
+           value="<%= locals.review_title || '' %>">
+    
+    <label for="review_text">Your Review:</label>
+    <textarea id="review_text" 
+              name="review_text" 
+              required 
+              minlength="10" 
+              maxlength="1000"
+              rows="6"
+              placeholder="Share your detailed experience with this vehicle..."><%= locals.review_text || '' %></textarea>
+    
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    
+    <input type="submit" value="Submit Review">
+  </fieldset>
+</form>
+
+<p><a href="/inv/detail/<%= inv_id %>">Back to Vehicle Details</a></p>
+
+<script>
+document.getElementById('addReviewForm').addEventListener('submit', function(e) {
+    const rating = document.getElementById('review_rating').value;
+    const title = document.getElementById('review_title').value.trim();
+    const text = document.getElementById('review_text').value.trim();
+    
+    let errors = [];
+    
+    if (!rating) errors.push('Please select a rating');
+    if (title.length < 3) errors.push('Review title must be at least 3 characters');
+    if (text.length < 10) errors.push('Review must be at least 10 characters');
+    
+    if (errors.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n' + errors.join('\n'));
+        return false;
+    }
+});
+</script>

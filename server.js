@@ -16,6 +16,7 @@ const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
+const reviewRoute = require("./routes/reviewRoute")
 const utilities = require("./utilities/")
 
 const app = express()
@@ -82,6 +83,9 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 
 // Account routes
 app.use("/account", utilities.handleErrors(accountRoute))
+
+// Review routes
+app.use("/reviews", utilities.handleErrors(reviewRoute))
 
 // Error routes
 app.use("/error", utilities.handleErrors(errorRoute))

@@ -158,12 +158,28 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const inventory_id = req.params.inventoryId
   const data = await invModel.getInventoryByInventoryId(inventory_id)
   const detailView = await utilities.buildInventoryDetailView(data)
+  
+  // Get reviews and rating for this vehicle
+  const reviewModel = require("../models/review-model")
+  const reviews = await reviewModel.getReviewsByInventoryId(inventory_id)
+  const ratingData = await reviewModel.getAverageRating(inventory_id)
+  
+  // Check if current user has already reviewed this vehicle
+  let hasReviewed = false
+  if (res.locals.loggedin && res.locals.accountData) {
+    hasReviewed = await reviewModel.hasUserReviewed(res.locals.accountData.account_id, inventory_id)
+  }
+  
   let nav = await utilities.getNav()
   const vehicleName = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
   res.render("./inventory/detail", {
     title: vehicleName,
     nav,
     detailView,
+    reviews: reviews.rows,
+    ratingData,
+    hasReviewed,
+    inv_id: inventory_id
   })
 }
 

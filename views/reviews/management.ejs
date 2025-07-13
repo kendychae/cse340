@@ -1,0 +1,140 @@
+<%# Review Management View %>
+<h1><%= title %></h1>
+
+<% if (locals.errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%}) %>
+  </ul>
+<% } %>
+
+<% if (locals.notice) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<div class="management-links">
+  <p><a href="/inv/">Back to Inventory Management</a></p>
+</div>
+
+<h2>Pending Reviews</h2>
+
+<% if (pendingReviews && pendingReviews.length > 0) { %>
+  <% pendingReviews.forEach(review => { %>
+    <div class="review-pending">
+      <div class="review-header">
+        <h3><%= review.review_title %></h3>
+        <div class="review-meta">
+          <span class="rating">Rating: <%= review.review_rating %>/5 stars</span>
+          <span class="reviewer">By: <%= review.account_firstname %> <%= review.account_lastname %> (<%= review.account_email %>)</span>
+          <span class="date">Date: <%= new Date(review.review_date).toLocaleDateString() %></span>
+        </div>
+      </div>
+      
+      <div class="vehicle-info">
+        <strong>Vehicle:</strong> <%= review.inv_year %> <%= review.inv_make %> <%= review.inv_model %>
+      </div>
+      
+      <div class="review-content">
+        <p><%= review.review_text %></p>
+      </div>
+      
+      <div class="review-actions">
+        <form method="post" action="/reviews/approve/<%= review.review_id %>" style="display: inline;">
+          <button type="submit" class="approve-btn" onclick="return confirm('Approve this review?')">
+            Approve Review
+          </button>
+        </form>
+        
+        <form method="post" action="/reviews/delete/<%= review.review_id %>" style="display: inline;">
+          <button type="submit" class="delete-btn" onclick="return confirm('Delete this review permanently?')">
+            Delete Review
+          </button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p class="no-reviews">No pending reviews at this time.</p>
+<% } %>
+
+<style>
+.review-pending {
+  border: 1px solid #ddd;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.review-header h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.review-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.rating {
+  font-weight: bold;
+  color: #ff6b00;
+}
+
+.vehicle-info {
+  background: #e8f4fd;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.review-content {
+  margin: 15px 0;
+  line-height: 1.5;
+}
+
+.review-actions {
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.approve-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.no-reviews {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+}
+</style>
