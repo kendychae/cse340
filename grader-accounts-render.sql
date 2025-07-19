@@ -1,6 +1,6 @@
 -- Grader Account Setup for Render Database
 -- Run this in pgAdmin connected to your Render database
--- Insert grader-requested accounts with hashed passwords
+-- Insert grader-requested accounts with NEW hashed passwords
 INSERT INTO public.account (
         account_firstname,
         account_lastname,
@@ -12,21 +12,21 @@ VALUES (
         'Basic',
         'Client',
         'basic@340.edu',
-        '$2a$10$YQiiz/K9rmZB4.SUNqHxsOnrn5CoC48SecTdeXhvn15t5sL6jW.V2',
+        '$2b$10$RAkReB8VJn.EVCzFMDd17esTEtNfPcXbCD20XKF9AJVCeOBfSvqXO',
         'Client'
     ),
     (
         'Happy',
         'Employee',
         'happy@340.edu',
-        '$2a$10$x2XkjJ.FQ5dGjJ5hZrVK8OH6nchm5Ht.7v4vxSOE5WJjPQ6QKpEDS',
+        '$2b$10$bo5Iy2eTYPsXtsD/fZSTtuRF19eu0RV0OvFlesbfnMkDP40s9txTO',
         'Employee'
     ),
     (
         'Manager',
         'Admin',
         'manager@340.edu',
-        '$2a$10$KzX5O8L8EYc38JbZP3YJZ.H4qM4.9aHlLYVS5WK.EFdHfgAhR4Y3K',
+        '$2b$10$nFVc.kDsi36Chubgk9I3HuEcdaDwIH4Pnu1kg9MqA/zRepykeFsoe',
         'Admin'
     ) ON CONFLICT (account_email) DO
 UPDATE
